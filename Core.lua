@@ -1659,7 +1659,7 @@ function TidyPlatesThreat:PLAYER_TALENT_UPDATE()
 end
 
 function TidyPlatesThreat:UPDATE_SHAPESHIFT_FORM()
-	
+	self.ShapeshiftUpdate()
 end
 
 function TidyPlatesThreat:ACTIVE_TALENT_GROUP_CHANGED()

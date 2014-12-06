@@ -1,7 +1,7 @@
 local _, ns = ...
 local t = ns.ThreatPlates
 local L = t.L
-local class = t.Class
+local class = t.Class()
 local path = t.Art
 
 local TidyPlatesThreat = LibStub("AceAddon-3.0"):GetAddon("TidyPlatesThreat");
@@ -56,7 +56,7 @@ local function GetValueChar(info)
 	return value
 end
 
-local function SetValueChar(info, val)
+local function SetValueChar(info, value)
 	local DB = TidyPlatesThreat.db.char
 	local keys = info.arg
 	for index = 1, #keys - 1 do
