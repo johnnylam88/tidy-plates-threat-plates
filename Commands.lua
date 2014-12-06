@@ -3,7 +3,7 @@ local t = ns.ThreatPlates
 local L = t.L
 
 local Active = function() return GetActiveSpecGroup() end
-function toggleDPS()
+local function toggleDPS()
 	TidyPlatesThreat:SetRole(false)
 	TidyPlatesThreat.db.profile.threat.ON = true
 	if TidyPlatesThreat.db.profile.verbose then
@@ -12,7 +12,7 @@ function toggleDPS()
 	end
 	TidyPlates:ForceUpdate()
 end
-function toggleTANK()
+local function toggleTANK()
 	TidyPlatesThreat:SetRole(true)
 	TidyPlatesThreat.db.profile.threat.ON = true
 	if TidyPlatesThreat.db.profile.verbose then

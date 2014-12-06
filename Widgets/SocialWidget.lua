@@ -8,7 +8,7 @@
 
 local path = "Interface\\AddOns\\TidyPlates_ThreatPlates\\Widgets\\SocialWidget\\"
 
-ListTable = {
+local ListTable = {
 	g = {},
 	b = {},
 	f = {}
