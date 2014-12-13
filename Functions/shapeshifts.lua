@@ -5,13 +5,15 @@ local class = t.Class()
 local AuraType = {
 	DEATHKNIGHT = "presences",
 	DRUID = "shapeshifts",
-	PALADIN = "auras",
-	WARRIOR = "stances"
+	MONK = "monk_stances",
+	WARRIOR = "stances",
 }
 local function ShapeshiftUpdate()
 	local db = TidyPlatesThreat.db.char[AuraType[class]]	
 	if db.ON then
-		TidyPlatesThreat.db.char.spec[t.Active()] = db[GetShapeshiftForm()]
+		local k = GetShapeshiftForm()
+		local spellID = (k > 0) and select(5, GetShapeshiftFormInfo(k)) or 0
+		TidyPlatesThreat.db.char.spec[t.Active()] = db[spellID]
 		t.Update()
 	end
 end

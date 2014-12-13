@@ -4733,45 +4733,46 @@ function TidyPlatesThreat:AddOptions(class)
 		DEATHKNIGHT = {
 			AuraType = L["Presences"],
 			index = "presences",
-			names = {
-				[1] = GetSpellInfo(48263), -- Blood
-				[2] = GetSpellInfo(48265), -- Frost
-				[3] = GetSpellInfo(48266) -- Unholy
-			},
+			names = {},
+			replacements = {},
 		},
 		DRUID = {
 			AuraType = L["Shapeshifts"],
 			index = "shapeshifts",
-			names = {
-				[1] = GetSpellInfo(5487), -- Bear Form
-				[2] = GetSpellInfo(1066), -- Aquatic Form
-				[3] = GetSpellInfo(768), -- Cat Form
-				[4] = GetSpellInfo(783), -- Travel Form				
-				[5] = GetSpellInfo(24858)..", "..GetSpellInfo(34551).." or "..GetSpellInfo(33943), -- Moonkin Form, Tree of Life, Flight Form
-				[6] = GetSpellInfo(33943) -- Flight Form (if moonkin or tree spec'd)
+			names = {},
+			replacements = {
+				[171746] = 768,		-- Claws of Shirvallah replaces Cat Form.
 			},
 		},
-		PALADIN = {
-			AuraType = L["Auras"],
-			index = "auras",
-			names = {
-				[1] = GetSpellInfo(465), -- Devotion Aura
-				[2] = GetSpellInfo(7294), -- Retribution Aura
-				[3] = GetSpellInfo(19746), -- Concentration Aura
-				[4] = GetSpellInfo(19891), -- Resistance Aura
-				[5] = GetSpellInfo(32223) -- Crusader Aura
-			},
+		MONK = {
+			AuraType = L["Stances"],
+			index = "stances",
+			names = {},
+			replacements = {},
 		},
 		WARRIOR = {
 			AuraType = L["Stances"],
 			index = "stances",
-			names = {
-				[1] = GetSpellInfo(2457), -- Battle Stance
-				[2] = GetSpellInfo(71), -- Defensive Stance
-				[3] = GetSpellInfo(2458) -- Berserker Stance
+			names = {},
+			replacements = {
+				[156291] = 2457,	-- Gladiator Stance replaces Battle Stance.
 			},
 		},
 	}
+	if AddOptionsTable[class] then
+		-- Populate stance options from the spells found on the stance/shapeshift bar.
+		local classopts = AddOptionsTable[class]
+		for k = 1, GetNumShapeshiftForms() do
+			local _, name, _, _, spellID = GetShapeshiftFormInfo(k)
+			if not classopts.names[spellID] then
+				if classopts.replacements[spellID] then
+					spellID = classopts.replacements[spellID]
+					name = GetSpellInfo(spellID)
+				end
+				classopts.names[spellID] = name
+			end
+		end
+	end
 	local index = AddOptionsTable[class].index
 	local _db = TidyPlatesThreat.db.char[index]
 	local AdditionalOptions = {
@@ -4835,7 +4836,7 @@ function TidyPlatesThreat:SetUpOptions()
 	UpdateSpecial();
 	t.Update();
 	
-	if class == "DEATHKNIGHT" or class == "DRUID" or class == "PALADIN" or class == "WARRIOR" then
+	if class == "DEATHKNIGHT" or class == "DRUID" or class == "MONK" or class == "WARRIOR" then
 		TidyPlatesThreat:AddOptions(class)
 	end
 	

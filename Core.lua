@@ -123,35 +123,33 @@ function TidyPlatesThreat:OnInitialize()
 			stances = {
 				ON = false,
 				[0] = false, -- No Stance
-				[1] = false, -- Battle Stance
-				[2] = true, -- Defensive Stance
-				[3] = false -- Berserker Stance
+				[71] = true, -- Defensive Stance
+				[2457] = false, -- Battle Stance
 			},
 			shapeshifts = {
 				ON = false,
 				[0] = false, -- Caster Form
-				[1] = true, -- Bear Form
-				[2] = false, -- Aquatic Form
-				[3] = false, -- Cat Form
-				[4] = false, -- Travel Form				
-				[5] = false, -- Moonkin Form, Tree of Life, (Swift) Flight Form
-				[6] = false -- Flight Form (if moonkin or tree spec'd)
+				[768] = false, -- Cat Form
+				[783] = false, -- Travel Form
+				[5487] = true, -- Bear Form
+				[24858] = false, -- Moonkin Form
+				[114282] = false, -- Treant Form
+				[165962] = false, -- Flight Form
 			},
 			presences = {
 				ON = false,
 				[0] = false, -- No Presence
-				[1] = true, -- Blood
-				[2] = false, -- Frost
-				[3] = false -- Unholy
+				[48263] = true, -- Blood
+				[48265] = false, -- Unholy
+				[48266] = false, -- Frost
 			},
-			auras = {
+			monk_stances = {
 				ON = false,
-				[0] = false, -- No Aura
-				[1] = true, -- Devotion Aura
-				[2] = false, -- Retribution Aura
-				[3] = false, -- Concentration Aura
-				[4] = false, -- Resistance Aura
-				[5] = false -- Crusader Aura
+				[0] = false, -- No Stance
+				[103985] = false, -- Stance of the Fierce Tiger
+				[115069] = true, -- Stance of the Sturdy Ox
+				[115070] = false, -- Stance of the Wise Serpent
+				[154436] = false, -- Stance of the Spirited Crane
 			},
 		},
 		profile = {
@@ -1604,7 +1602,7 @@ function TidyPlatesThreat:PLAYER_LOGIN(...)
 	if self.db.char.welcome and ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) then
 		t.Print(L["|cff89f559Threat Plates:|r Welcome back |cff"]..t.HCC[class]..UnitName("player").."|r!!")
 	end
-	if class == "WARRIOR" or class == "DRUID" or class == "DEATHKNIGHT" or class == "PALADIN" then
+	if class == "DEATHKNIGHT" or class == "DRUID" or class == "MONK" or class == "WARRIOR" then
 		self:RegisterEvent("UPDATE_SHAPESHIFT_FORM")
 	end 
 end
@@ -1666,6 +1664,11 @@ function TidyPlatesThreat:ACTIVE_TALENT_GROUP_CHANGED()
 	self:SetSpecInfo()
 	if ((TidyPlatesOptions.primary == "Threat Plates") or (TidyPlatesOptions.secondary == "Threat Plates")) and self.db.profile.verbose then
 		t.Print(L["|cff89F559Threat Plates|r: Player spec change detected: |cff"]..t.HCC[class]..self:SpecName()..L["|r, you are now in your |cff89F559"]..t.ActiveText()..L["|r spec and are now in your "]..self:RoleText()..L[" role."])
+	end
+	-- Update stance/shapeshift options table.
+	if class == "DEATHKNIGHT" or class == "DRUID" or class == "MONK" or class == "WARRIOR" then
+		self:AddOptions(class)
+		LibStub("AceConfigRegistry-3.0"):NotifyChange("Tidy Plates: Threat Plates")
 	end
 end
 
