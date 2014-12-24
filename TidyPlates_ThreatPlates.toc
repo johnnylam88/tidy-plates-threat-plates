@@ -6,7 +6,7 @@
 ## Author: Suicidal Katt
 ## RequiredDeps: TidyPlates,TidyPlatesWidgets
 ## SavedVariables: ThreatPlatesDB
-## Version: 7.012-Alpha
+## Version: 7.013-Alpha
 ## OptionalDeps: Ace3, LibSharedMedia-3.0
 
 Libs\Libs.xml
