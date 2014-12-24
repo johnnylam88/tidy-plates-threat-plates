@@ -17,6 +17,7 @@ do
 		end		
 		if isShown and isType then
 			local mode = DB.mode
+			local spellfound = tContains(DB.filter, aura.name)
 			if spellfound then spellfound = true end
 			local isMine = (aura.caster == UnitGUID("Player"))
 			if mode == "whitelist" then
