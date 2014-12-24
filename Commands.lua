@@ -2,6 +2,8 @@ local _,ns = ...
 local t = ns.ThreatPlates
 local L = t.L
 
+
+
 local Active = function() return GetActiveSpecGroup() end
 local function toggleDPS()
 	TidyPlatesThreat:SetRole(false)
@@ -21,16 +23,10 @@ local function toggleTANK()
 	end
 	TidyPlates:ForceUpdate()
 end
-local function TPTPDPS()
-	toggleDPS()
-end
 SLASH_TPTPDPS1 = "/tptpdps"
-SlashCmdList["TPTPDPS"] = TPTPDPS
-local function TPTPTANK()
-	toggleTANK()
-end
+SlashCmdList["TPTPDPS"] = toggleDPS
 SLASH_TPTPTANK1 = "/tptptank"
-SlashCmdList["TPTPTANK"] = TPTPTANK
+SlashCmdList["TPTPTANK"] = toggleTANK
 local function TPTPTOGGLE()
 	if TidyPlatesThreat.db.char.spec[t.Active()] then 
 		toggleDPS()

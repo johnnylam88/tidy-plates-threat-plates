@@ -9,7 +9,7 @@ local AuraType = {
 	WARRIOR = "stances",
 }
 local function ShapeshiftUpdate()
-	local db = TidyPlatesThreat.db.char[AuraType[class]]	
+	local db = TidyPlatesThreat.db.char[AuraType[class]]
 	if db.ON then
 		local k = GetShapeshiftForm()
 		local spellID = (k > 0) and select(5, GetShapeshiftFormInfo(k)) or 0

@@ -4800,6 +4800,7 @@ function TidyPlatesThreat:AddOptions(class)
 	}
 	local addorder = 20
 	for k_c,k_v in pairs(AddOptionsTable[class].names) do
+		print(k_c.. " "..k_v)
 		AdditionalOptions.args.Options.args[index..k_c] = {
 			type = "group",
 			name = k_v,
