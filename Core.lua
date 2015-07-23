@@ -1667,7 +1667,7 @@ function TidyPlatesThreat:ACTIVE_TALENT_GROUP_CHANGED()
 	end
 	-- Update stance/shapeshift options table.
 	if class == "DEATHKNIGHT" or class == "DRUID" or class == "MONK" or class == "WARRIOR" then
-		self:AddOptions(class)
+		self:SetUpOptions()
 		LibStub("AceConfigRegistry-3.0"):NotifyChange("Tidy Plates: Threat Plates")
 	end
 end
