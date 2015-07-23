@@ -4824,6 +4824,7 @@ function TidyPlatesThreat:AddOptions(class)
 		}
 		addorder = addorder + 10
 	end
+	local options = GetOptions()
 	options.args.Stances = {};
 	options.args.Stances = AdditionalOptions;
 end
